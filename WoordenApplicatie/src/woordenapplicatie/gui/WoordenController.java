@@ -103,6 +103,17 @@ public class WoordenController implements Initializable {
 
         return treeWords;
     }
+    public HashSet<String> sorteerHashFunction(String[] words){
+        HashSet<String> hashWords = new HashSet();
+
+        hashWords.addAll(Arrays.asList(words));
+
+        List<String> hashedList = new ArrayList<String>(hashWords);
+        Collections.sort(hashedList);
+
+
+        return hashWords;
+    }
 
     public String sorteerToSring(TreeSet<String> treeWords){
         String output = "The words are: \n";
@@ -142,7 +153,7 @@ public class WoordenController implements Initializable {
     @FXML
     private void concordatieAction(ActionEvent event) {
         ArrayList<String> lines = new ArrayList<String>();
-        lines.addAll(Arrays.asList(taInput.getText().toLowerCase().replaceAll("é", "e").split("\\n")));
+        lines.addAll(Arrays.asList(taInput.getText().replaceAll("é", "e").split("\\n")));
         lines.removeAll(Arrays.asList("", null));
 
         ArrayList<String[]> wordsPerLine = new ArrayList<String[]>();
@@ -154,12 +165,12 @@ public class WoordenController implements Initializable {
     }
 
     public TreeMap<String, ArrayList<Integer>> concordatieFunction(ArrayList<String[]> wordsPerLine){
-        TreeMap<String, ArrayList<Integer>> mappedTree = new TreeMap<String, ArrayList<Integer>>();
+        TreeMap<String, ArrayList<Integer>> mappedTree = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
         for (int i = 0; i < wordsPerLine.size(); i++){
             for (String word : wordsPerLine.get(i)){
-                final Integer line = i;
-                mappedTree.merge(word, new ArrayList<Integer>(Arrays.asList(i + 1)), (oldValue, newValue) -> {
+                final int line = i;
+                mappedTree.merge(word, new ArrayList<>(Arrays.asList(i + 1)), (oldValue, newValue) -> {
                     oldValue.add(line + 1);
                     return oldValue;
                 } ); // O (n log (n))

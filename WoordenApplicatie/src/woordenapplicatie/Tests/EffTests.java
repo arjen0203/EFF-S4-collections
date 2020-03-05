@@ -95,7 +95,7 @@ public class EffTests {
         long startTime = System.nanoTime();
         controller.sorteerFunction(wordsTenThousand);
         long endTime = System.nanoTime();
-        System.out.println("Time in nanoseconds aantalTenThousendTreeSet: " + (endTime-startTime));
+        System.out.println("Time in nanoseconds sorteerTenThousendTreeSet: " + (endTime-startTime));
     }
 
     @Test
@@ -103,7 +103,23 @@ public class EffTests {
         long startTime = System.nanoTime();
         controller.sorteerFunction(wordsMillion);
         long endTime = System.nanoTime();
-        System.out.println("Time in nanoseconds aantalMillionTreeSet: " + (endTime-startTime));
+        System.out.println("Time in nanoseconds sorteerMillionTreeSet: " + (endTime-startTime));
+    }
+
+    @Test
+    public void sorteerTenThousendHashTest(){
+        long startTime = System.nanoTime();
+        controller.sorteerHashFunction(wordsTenThousand);
+        long endTime = System.nanoTime();
+        System.out.println("Time in nanoseconds sorteerTenThousendHashSet: " + (endTime-startTime));
+    }
+
+    @Test
+    public void sorteerMillionHashTest(){
+        long startTime = System.nanoTime();
+        controller.sorteerHashFunction(wordsMillion);
+        long endTime = System.nanoTime();
+        System.out.println("Time in nanoseconds sorteerMillionHashSet: " + (endTime-startTime));
     }
 
     @Test
